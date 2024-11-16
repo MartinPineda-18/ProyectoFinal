@@ -5,19 +5,19 @@ public class Main {
 
         Gimnasio gimnasio = new Gimnasio();
         Scanner teclado = new Scanner(System.in);
-        Cliente cliente = new Cliente();
-        Entrenador entrenador = new Entrenador();
 
         int opc;
 
         do {
 
-        System.out.println("Ingrese la opcion deseada: \n" +
+        System.out.println("\t\tMENU GIMNASIO: \n" +
                 "1) Agregar persona\n" +
                 "2) Eliminar persona\n" +
                 "3) Mostrar personas\n" +
                 "4) Buscar persona\n" +
-                "5) Salir");
+                "5) Generar cobro mensualidad\n" +
+                "6) Salir\n" +
+                "Ingrese la opcion deseada: ");
         opc = teclado.nextInt();
         teclado.nextLine();
 
@@ -32,6 +32,8 @@ public class Main {
                 teclado.nextLine();
 
                 if (opc1 == 1){
+
+                    Cliente cliente = new Cliente();
                     System.out.println("Datos cliente: \n");
 
                     System.out.println("Ingrese nombre: ");
@@ -44,13 +46,26 @@ public class Main {
                     System.out.println("Ingrese cedula: ");
                     cliente.setId(teclado.nextLine());
 
+                    System.out.println("Tipos de membresia:\n" +
+                            "-Basica\n" +
+                            "-Premium\n" +
+                            "-Vip");
                     System.out.println("Ingrese el tipo de membresia: ");
-                    cliente.setTipoMembresia(teclado.nextLine());
+                    String tipoMembresia = teclado.nextLine();
+                    if (tipoMembresia.equals("Basica") || tipoMembresia.equals("Premium")
+                            || tipoMembresia.equals("Vip")) {
+                        cliente.setTipoMembresia(tipoMembresia);
+                    } else {
+                        System.out.println("Membresia no valida.\n" +
+                                "Membresia 'basica' asignada por defecto");
+                        cliente.setTipoMembresia("Basica");
+                    }
 
                     gimnasio.agregarPersona(cliente);
 
                 } else if (opc1 == 2) {
 
+                    Entrenador entrenador = new Entrenador();
                     System.out.println("Datos entrenador: \n");
 
                     System.out.println("Ingrese nombre: ");
@@ -83,7 +98,12 @@ public class Main {
 
                 System.out.print("Ingrese la cedula de la persona a eliminar: ");
                 String idEliminar = teclado.nextLine();
-                gimnasio.eliminarPersona(idEliminar);
+                Persona personaEliminar = gimnasio.buscarPersona(idEliminar);
+                if (personaEliminar != null) {
+                    gimnasio.eliminarPersona(idEliminar);
+                } else {
+                    System.out.println("Cedula no registrada");
+                }
                 break;
 
             case 3:
@@ -105,6 +125,11 @@ public class Main {
 
             case 5:
 
+                gimnasio.cobroMembresia();
+                break;
+
+            case 6:
+
                 System.out.println("Saliendo del menu");
                 break;
 
@@ -113,6 +138,6 @@ public class Main {
                 System.out.println("Opción no válida");
 
             }
-        } while (opc != 5);
+        } while (opc != 6);
     }
 }

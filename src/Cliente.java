@@ -24,4 +24,17 @@ public class Cliente extends Persona {
     public void setTipoMembresia(String tipoMembresia) {
         this.tipoMembresia = tipoMembresia;
     }
+
+    public double pagoMembresia() {
+
+        if (tipoMembresia.equals("Basica")) {
+            return 60000;
+        } else if (tipoMembresia.equals("Premium")) {
+            return 80000;
+        } else if (tipoMembresia.equals("Vip")) {
+            return 120000;
+        } else {
+            return 0.0;
+        }
+    }
 }
