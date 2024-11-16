@@ -23,6 +23,14 @@ public class Gimnasio implements GestionPersona{
         return personaHashMap.get(id);
     }
 
+    public HashMap<String, Persona> getPersonaHashMap() {
+        return personaHashMap;
+    }
+
+    public void setPersonaHashMap(HashMap<String, Persona> personaHashMap) {
+        this.personaHashMap = personaHashMap;
+    }
+
     public void mostrarPersonas() {
         for (Persona persona : personaHashMap.values()) {
             System.out.println(persona.obtenerInformacion());

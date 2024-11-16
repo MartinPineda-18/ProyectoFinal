@@ -57,7 +57,7 @@ public class Main {
                         cliente.setTipoMembresia(tipoMembresia);
                     } else {
                         System.out.println("Membresia no valida.\n" +
-                                "Membresia 'basica' asignada por defecto");
+                                "Membresia 'Basica' asignada por defecto");
                         cliente.setTipoMembresia("Basica");
                     }
 
@@ -108,7 +108,11 @@ public class Main {
 
             case 3:
 
-                gimnasio.mostrarPersonas();
+                if (gimnasio.getPersonaHashMap().isEmpty()) {
+                    System.out.println("No hay personas registradas en el gimnasio");
+                } else {
+                    gimnasio.mostrarPersonas();
+                }
                 break;
 
             case 4:
